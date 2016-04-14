@@ -17,7 +17,7 @@ namespace WebApplication6.Models
 
     //    // Navigation property
     //    public Category Category { get; set; }
-        
+
     //    public string OwnerUserID { get; set; }
     //    public string CreationUserID { get; set; }
 

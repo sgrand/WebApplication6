@@ -11,6 +11,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebApplication6.Models;
 using WebApplication6.Services;
+using Microsoft.AspNet.Localization;
+using System.Globalization;
+using WebApplication6.Filters;
+using Microsoft.AspNet.Identity;
+using WebApplication6.Infrastructure.Identity;
+using WebApplication6.Infrastructure.Localization;
+using Microsoft.Extensions.PlatformAbstractions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WebApplication6
 {
@@ -48,18 +56,36 @@ namespace WebApplication6
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddScoped<SignInManager<ApplicationUser>, CustomSignInManager>();
+
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+                       
+            services
+                .AddMvc()
+                .AddViewLocalization(options => options.ResourcesPath = "Resources")
+                .AddDataAnnotationsLocalization();
+
+            services.AddScoped<LanguageActionFilter>();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env/*, IApplicationEnvironment appEnv*/, ILoggerFactory loggerFactory)
         {
+
+            loggerFactory.MinimumLevel = LogLevel.Information;
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            //var certFile = appEnv.ApplicationBasePath + "\\democertificate.pfx";
+            //var signingCertificate = new X509Certificate2(certFile, "democertificate.io");
+
+            //app.UseKestrelHttps(signingCertificate);
 
             if (env.IsDevelopment())
             {
@@ -89,6 +115,38 @@ namespace WebApplication6
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            var requestLocalizationOptions = new RequestLocalizationOptions
+            {
+                // Set options here to change middleware behavior
+                SupportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("es-ES")
+                },
+                SupportedUICultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("es-ES")
+
+                },
+                RequestCultureProviders = new List<IRequestCultureProvider>
+                {
+                    new CookieRequestCultureProvider
+                    {
+                        CookieName = Helpers.CultureHelper.CultureCookieName
+                    },
+                    new AcceptLanguageHeaderRequestCultureProvider
+                    {
+
+                    }
+
+                }
+            };
+
+            requestLocalizationOptions.RequestCultureProviders.Insert(0, new UserProfileRequestCultureProvider());
+            app.UseRequestLocalization(requestLocalizationOptions, defaultRequestCulture: new RequestCulture("en-US"));
+
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using WebApplication6.Models;
 using WebApplication6.Services;
 using WebApplication6.ViewModels.Manage;
+using WebApplication6.Helpers;
 
 namespace WebApplication6.Controllers
 {
@@ -313,6 +314,31 @@ namespace WebApplication6.Controllers
             var result = await _userManager.AddLoginAsync(user, info);
             var message = result.Succeeded ? ManageMessageId.AddLoginSuccess : ManageMessageId.Error;
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
+        }
+        
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfigureCultureInfo(ConfigureCultureInfoViewModel viewModel)
+        {
+            if (User.IsSignedIn())
+            {
+                var user = await GetCurrentUserAsync();
+                if (user == null)
+                {
+                    return View("Error");
+                }
+                user.Language = viewModel.Culture;
+
+                await _userManager.UpdateAsync(user);
+                await _signInManager.SignInAsync(user, true); // Force the CreateUserPrincipalAsync method on our CustomSignInManager to be called again
+
+            }
+            else
+            {
+                CultureHelper.SetCookieToResponse(ActionContext, viewModel.Culture);
+            }
+
+            return RedirectToAction("Index","Home");
         }
 
         #region Helpers

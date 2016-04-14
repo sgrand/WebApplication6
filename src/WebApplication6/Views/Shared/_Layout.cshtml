@@ -33,9 +33,13 @@
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-controller="Home" asp-action="About">About</a></li>
                         <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        <li style="position: relative;display: block;padding: 10px 15px 0 15px;">
+                            @await Component.InvokeAsync("LanguageMenu")
+                        </li>
                     </ul>
                     @await Html.PartialAsync("_LoginPartial")
-                </div>
+                   
+                </div>  
             </div>
         </div>
         <div class="container body-content">

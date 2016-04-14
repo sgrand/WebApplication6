@@ -1,0 +1,15 @@
+﻿@model ConfigureCultureInfoViewModel
+
+<form asp-controller="Manage" asp-action="ConfigureCultureInfo" method="post" class="form-horizontal" role="form">
+    <div class="form-group">
+        @*<label asp-for="Culture" class="col-sm-2 control-label"></label>*@
+        <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
+            <select asp-for="Culture" asp-items="Model.AvailableCultures" class="form-control" onchange="this.form.submit();"></select>
+        </div>
+        @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Save Settings</button>
+            </div>
+        </div>*@
+    </div>
+</form>

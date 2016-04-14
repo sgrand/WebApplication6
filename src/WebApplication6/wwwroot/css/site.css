@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #A53131;
+    color: #E4DEDE;
 }
 
 /* Wrapping element */
@@ -8,13 +10,18 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+
+}
+
+.text-danger { 
+    color: #E5F75F;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
 }
 
 /* Carousel */
@@ -31,4 +38,84 @@ textarea {
     .carousel-caption {
         z-index: 10 !important;
     }
+
+    /* Google Geocoding Service */
+    #floating-panel {
+        padding: 10px;
+        align-content: center;
+        text-align: center;
+        line-height: 40px;
+    }
+
+    .searchrow {
+        margin-top: 80px;
+        /*align-items: center; 
+     vertical-align: middle;*/
+    }
+
+    /* centered columns styles */
+    .row-centered {
+        text-align: center;
+    }
+
+    .featurette .search {
+        padding: 3%;
+        max-width: 980px;
+        margin: 0 auto;
+    }
+
+    .featurette-inner {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .featurette {
+        display: table;
+        width: 100%;
+        height: 30%;
+        /* vertical-align: middle; */
+        /*background: #555;*/
+        color: #fff;
+    }
+
+    .col-centered {
+        display: inline-block;
+        float: none;
+        /* reset the text-align */
+        text-align: left;
+        /* inline-block space fix */
+        margin-right: -4px;
+    }
+
+    #search-input {
+        margin: 28px 0 0;
+        padding: 9px 11px 9px 40px;
+        width: 400px;
+        max-width: 400px;
+        height: 32px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 32px;
+        border: none;
+        box-sizing: content-box;
+        color: #3A444F;
+        background-size: 26px 26px;
+        background-image: url(../images/download.png);
+        background-repeat: no-repeat;
+        background-color: #fff;
+        background-position: 10px 10px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", sans-serif;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    /*.st-default-search-input {
+    background-size: 13px 13px;
+    background-image: url(data:image/png;base64,../images/download.png);
+}*/
+
 }

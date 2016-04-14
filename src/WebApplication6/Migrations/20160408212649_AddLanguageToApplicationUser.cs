@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace WebApplication6.Migrations
 {
-    public partial class Initial : Migration
+    public partial class AddLanguageToApplicationUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,18 +13,11 @@ namespace WebApplication6.Migrations
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserLogin<string>_ApplicationUser_UserId", table: "AspNetUserLogins");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserRole<string>_IdentityRole_RoleId", table: "AspNetUserRoles");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserRole<string>_ApplicationUser_UserId", table: "AspNetUserRoles");
-            migrationBuilder.AlterColumn<string>(
-                name: "UserId",
-                table: "AspNetUserLogins",
-                nullable: false);
-            migrationBuilder.AlterColumn<string>(
-                name: "UserId",
-                table: "AspNetUserClaims",
-                nullable: false);
-            migrationBuilder.AlterColumn<string>(
-                name: "RoleId",
-                table: "AspNetRoleClaims",
-                nullable: false);
+            migrationBuilder.AddColumn<string>(
+                name: "Language",
+                table: "AspNetUsers",
+                nullable: false,
+                defaultValue: "en");
             migrationBuilder.AddForeignKey(
                 name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId",
                 table: "AspNetRoleClaims",
@@ -69,18 +62,7 @@ namespace WebApplication6.Migrations
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserLogin<string>_ApplicationUser_UserId", table: "AspNetUserLogins");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserRole<string>_IdentityRole_RoleId", table: "AspNetUserRoles");
             migrationBuilder.DropForeignKey(name: "FK_IdentityUserRole<string>_ApplicationUser_UserId", table: "AspNetUserRoles");
-            migrationBuilder.AlterColumn<string>(
-                name: "UserId",
-                table: "AspNetUserLogins",
-                nullable: true);
-            migrationBuilder.AlterColumn<string>(
-                name: "UserId",
-                table: "AspNetUserClaims",
-                nullable: true);
-            migrationBuilder.AlterColumn<string>(
-                name: "RoleId",
-                table: "AspNetRoleClaims",
-                nullable: true);
+            migrationBuilder.DropColumn(name: "Language", table: "AspNetUsers");
             migrationBuilder.AddForeignKey(
                 name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId",
                 table: "AspNetRoleClaims",

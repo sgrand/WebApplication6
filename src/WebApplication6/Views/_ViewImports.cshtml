@@ -1,6 +1,12 @@
-﻿@using WebApplication6
+﻿@using System.Threading.Tasks
+@using WebApplication6
 @using WebApplication6.Models
+@using WebApplication6.Resources
 @using WebApplication6.ViewModels.Account
 @using WebApplication6.ViewModels.Manage
 @using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Mvc.Localization
+@using Microsoft.Extensions.Localization
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+@inject IStringLocalizer<WebApplication6Loc> TranslateLocalizer
+@inject IViewLocalizer LocString

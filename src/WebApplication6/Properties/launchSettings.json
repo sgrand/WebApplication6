@@ -4,7 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:2526/",
-      "sslPort": 0
+      "sslPort": 44367
     }
   },
   "profiles": {
@@ -20,6 +20,7 @@
       "environmentVariables": {
         "Hosting:Environment": "Development"
       }
-    }
+    },
+    "IIS": {}
   }
 }

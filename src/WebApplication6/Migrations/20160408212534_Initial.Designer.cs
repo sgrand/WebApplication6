@@ -8,7 +8,7 @@ using WebApplication6.Models;
 namespace WebApplication6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160222233156_Initial")]
+    [Migration("20160408212534_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
