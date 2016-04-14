@@ -60,7 +60,7 @@ namespace WebApplication6.Resources {
         }
         
         /// <summary>
-        ///    Recherche une chaîne localisée similaire à This is default english text.
+        ///    Recherche une chaîne localisée similaire à This is default english text 12.
         /// </summary>
         internal static string Text {
             get {
